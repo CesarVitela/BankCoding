@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbBankCodingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAccount">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+          </Key>
+          <Property Name="IdAccount" Type="int" Nullable="false" />
+          <Property Name="Account" Type="varchar" MaxLength="15" />
+          <Property Name="IdAccountType" Type="int" />
+          <Property Name="IdClient" Type="int" />
+        </EntityType>
+        <EntityType Name="tblAccountMovement">
+          <Key>
+            <PropertyRef Name="IdAccountMovement" />
+          </Key>
+          <Property Name="IdAccountMovement" Type="int" Nullable="false" />
+          <Property Name="IdAccount" Type="int" />
+          <Property Name="IdTransaction" Type="int" />
+          <Property Name="Concept" Type="varchar" MaxLength="100" />
+          <Property Name="Reference" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Interests" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblAccountType">
+          <Key>
+            <PropertyRef Name="IdAccountType" />
+          </Key>
+          <Property Name="IdAccountType" Type="int" Nullable="false" />
+          <Property Name="AccountType" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblClient">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="Names" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PaternalLastName" Type="varchar" MaxLength="50" />
+          <Property Name="MaternalLastName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblMoneyAccount">
+          <Key>
+            <PropertyRef Name="IdMoneyAccount" />
+          </Key>
+          <Property Name="IdMoneyAccount" Type="int" Nullable="false" />
+          <Property Name="IdAccount" Type="int" />
+          <Property Name="Money" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblParameter">
+          <Key>
+            <PropertyRef Name="IdParameter" />
+          </Key>
+          <Property Name="IdParameter" Type="int" Nullable="false" />
+          <Property Name="Parameter" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tblReturnCode">
+          <Key>
+            <PropertyRef Name="IdReturnCode" />
+          </Key>
+          <Property Name="IdReturnCode" Type="int" Nullable="false" />
+          <Property Name="ReturnCode" Type="varchar" MaxLength="3" />
+          <Property Name="Message" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tblTransaction">
+          <Key>
+            <PropertyRef Name="IdTransaction" />
+          </Key>
+          <Property Name="IdTransaction" Type="int" Nullable="false" />
+          <Property Name="Transaction" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK__tblAccoun__IdAcc__38996AB5">
+          <End Role="tblAccountType" Type="Self.tblAccountType" Multiplicity="0..1" />
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccountType">
+              <PropertyRef Name="IdAccountType" />
+            </Principal>
+            <Dependent Role="tblAccount">
+              <PropertyRef Name="IdAccountType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccoun__IdAcc__5CD6CB2B">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblAccountMovement" Type="Self.tblAccountMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="tblAccountMovement">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccoun__IdCli__398D8EEE">
+          <End Role="tblClient" Type="Self.tblClient" Multiplicity="0..1" />
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblClient">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="tblAccount">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccoun__IdTra__5DCAEF64">
+          <End Role="tblTransaction" Type="Self.tblTransaction" Multiplicity="0..1" />
+          <End Role="tblAccountMovement" Type="Self.tblAccountMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransaction">
+              <PropertyRef Name="IdTransaction" />
+            </Principal>
+            <Dependent Role="tblAccountMovement">
+              <PropertyRef Name="IdTransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblMoneyA__IdAcc__59FA5E80">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblMoneyAccount" Type="Self.tblMoneyAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="tblMoneyAccount">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spCheckBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAccount" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spCheckMovements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAccount" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spComputeInterest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spDeposit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAccount" Type="int" Mode="In" />
+          <Parameter Name="Concept" Type="varchar" Mode="In" />
+          <Parameter Name="Reference" Type="varchar" Mode="In" />
+          <Parameter Name="Amount" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="spGetClientsInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetReturnCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReturnCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertAccountMovements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAccount" Type="int" Mode="In" />
+          <Parameter Name="IdTransaction" Type="int" Mode="In" />
+          <Parameter Name="Concept" Type="varchar" Mode="In" />
+          <Parameter Name="Reference" Type="varchar" Mode="In" />
+          <Parameter Name="Amount" Type="decimal" Mode="In" />
+          <Parameter Name="Interests" Type="decimal" Mode="In" />
+          <Parameter Name="TotalAmount" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="spTransfer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAccount" Type="int" Mode="In" />
+          <Parameter Name="Concept" Type="varchar" Mode="In" />
+          <Parameter Name="Reference" Type="varchar" Mode="In" />
+          <Parameter Name="Amount" Type="decimal" Mode="In" />
+          <Parameter Name="IdAccountTransfer" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spWithdrawal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAccount" Type="int" Mode="In" />
+          <Parameter Name="Amount" Type="decimal" Mode="In" />
+        </Function>
+        <EntityContainer Name="dbBankCodingModelStoreContainer">
+          <EntitySet Name="tblAccount" EntityType="Self.tblAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAccountMovement" EntityType="Self.tblAccountMovement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAccountType" EntityType="Self.tblAccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblClient" EntityType="Self.tblClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMoneyAccount" EntityType="Self.tblMoneyAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblParameter" EntityType="Self.tblParameter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblReturnCode" EntityType="Self.tblReturnCode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTransaction" EntityType="Self.tblTransaction" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblAccoun__IdAcc__38996AB5" Association="Self.FK__tblAccoun__IdAcc__38996AB5">
+            <End Role="tblAccountType" EntitySet="tblAccountType" />
+            <End Role="tblAccount" EntitySet="tblAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccoun__IdAcc__5CD6CB2B" Association="Self.FK__tblAccoun__IdAcc__5CD6CB2B">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblAccountMovement" EntitySet="tblAccountMovement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccoun__IdCli__398D8EEE" Association="Self.FK__tblAccoun__IdCli__398D8EEE">
+            <End Role="tblClient" EntitySet="tblClient" />
+            <End Role="tblAccount" EntitySet="tblAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccoun__IdTra__5DCAEF64" Association="Self.FK__tblAccoun__IdTra__5DCAEF64">
+            <End Role="tblTransaction" EntitySet="tblTransaction" />
+            <End Role="tblAccountMovement" EntitySet="tblAccountMovement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblMoneyA__IdAcc__59FA5E80" Association="Self.FK__tblMoneyA__IdAcc__59FA5E80">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblMoneyAccount" EntitySet="tblMoneyAccount" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbBankCodingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAccount">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+          </Key>
+          <Property Name="IdAccount" Type="Int32" Nullable="false" />
+          <Property Name="Account" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IdAccountType" Type="Int32" />
+          <Property Name="IdClient" Type="Int32" />
+          <NavigationProperty Name="tblAccountType" Relationship="Self.FK__tblAccoun__IdAcc__38996AB5" FromRole="tblAccount" ToRole="tblAccountType" />
+          <NavigationProperty Name="tblAccountMovement" Relationship="Self.FK__tblAccoun__IdAcc__5CD6CB2B" FromRole="tblAccount" ToRole="tblAccountMovement" />
+          <NavigationProperty Name="tblClient" Relationship="Self.FK__tblAccoun__IdCli__398D8EEE" FromRole="tblAccount" ToRole="tblClient" />
+          <NavigationProperty Name="tblMoneyAccount" Relationship="Self.FK__tblMoneyA__IdAcc__59FA5E80" FromRole="tblAccount" ToRole="tblMoneyAccount" />
+        </EntityType>
+        <EntityType Name="tblAccountMovement">
+          <Key>
+            <PropertyRef Name="IdAccountMovement" />
+          </Key>
+          <Property Name="IdAccountMovement" Type="Int32" Nullable="false" />
+          <Property Name="IdAccount" Type="Int32" />
+          <Property Name="IdTransaction" Type="Int32" />
+          <Property Name="Concept" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Interests" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="tblAccount" Relationship="Self.FK__tblAccoun__IdAcc__5CD6CB2B" FromRole="tblAccountMovement" ToRole="tblAccount" />
+          <NavigationProperty Name="tblTransaction" Relationship="Self.FK__tblAccoun__IdTra__5DCAEF64" FromRole="tblAccountMovement" ToRole="tblTransaction" />
+        </EntityType>
+        <EntityType Name="tblAccountType">
+          <Key>
+            <PropertyRef Name="IdAccountType" />
+          </Key>
+          <Property Name="IdAccountType" Type="Int32" Nullable="false" />
+          <Property Name="AccountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblAccount" Relationship="Self.FK__tblAccoun__IdAcc__38996AB5" FromRole="tblAccountType" ToRole="tblAccount" />
+        </EntityType>
+        <EntityType Name="tblClient">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="Names" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PaternalLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MaternalLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblAccount" Relationship="Self.FK__tblAccoun__IdCli__398D8EEE" FromRole="tblClient" ToRole="tblAccount" />
+        </EntityType>
+        <EntityType Name="tblMoneyAccount">
+          <Key>
+            <PropertyRef Name="IdMoneyAccount" />
+          </Key>
+          <Property Name="IdMoneyAccount" Type="Int32" Nullable="false" />
+          <Property Name="IdAccount" Type="Int32" />
+          <Property Name="Money" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="tblAccount" Relationship="Self.FK__tblMoneyA__IdAcc__59FA5E80" FromRole="tblMoneyAccount" ToRole="tblAccount" />
+        </EntityType>
+        <EntityType Name="tblParameter">
+          <Key>
+            <PropertyRef Name="IdParameter" />
+          </Key>
+          <Property Name="IdParameter" Type="Int32" Nullable="false" />
+          <Property Name="Parameter" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblReturnCode">
+          <Key>
+            <PropertyRef Name="IdReturnCode" />
+          </Key>
+          <Property Name="IdReturnCode" Type="Int32" Nullable="false" />
+          <Property Name="ReturnCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblTransaction">
+          <Key>
+            <PropertyRef Name="IdTransaction" />
+          </Key>
+          <Property Name="IdTransaction" Type="Int32" Nullable="false" />
+          <Property Name="Transaction" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblAccountMovement" Relationship="Self.FK__tblAccoun__IdTra__5DCAEF64" FromRole="tblTransaction" ToRole="tblAccountMovement" />
+        </EntityType>
+        <Association Name="FK__tblAccoun__IdAcc__38996AB5">
+          <End Role="tblAccountType" Type="Self.tblAccountType" Multiplicity="0..1" />
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccountType">
+              <PropertyRef Name="IdAccountType" />
+            </Principal>
+            <Dependent Role="tblAccount">
+              <PropertyRef Name="IdAccountType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccoun__IdAcc__5CD6CB2B">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblAccountMovement" Type="Self.tblAccountMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="tblAccountMovement">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccoun__IdCli__398D8EEE">
+          <End Role="tblClient" Type="Self.tblClient" Multiplicity="0..1" />
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblClient">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="tblAccount">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblMoneyA__IdAcc__59FA5E80">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblMoneyAccount" Type="Self.tblMoneyAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="IdAccount" />
+            </Principal>
+            <Dependent Role="tblMoneyAccount">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccoun__IdTra__5DCAEF64">
+          <End Role="tblTransaction" Type="Self.tblTransaction" Multiplicity="0..1" />
+          <End Role="tblAccountMovement" Type="Self.tblAccountMovement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransaction">
+              <PropertyRef Name="IdTransaction" />
+            </Principal>
+            <Dependent Role="tblAccountMovement">
+              <PropertyRef Name="IdTransaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbBankCodingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAccount" EntityType="Self.tblAccount" />
+          <EntitySet Name="tblAccountMovement" EntityType="Self.tblAccountMovement" />
+          <EntitySet Name="tblAccountType" EntityType="Self.tblAccountType" />
+          <EntitySet Name="tblClient" EntityType="Self.tblClient" />
+          <EntitySet Name="tblMoneyAccount" EntityType="Self.tblMoneyAccount" />
+          <EntitySet Name="tblParameter" EntityType="Self.tblParameter" />
+          <EntitySet Name="tblReturnCode" EntityType="Self.tblReturnCode" />
+          <EntitySet Name="tblTransaction" EntityType="Self.tblTransaction" />
+          <AssociationSet Name="FK__tblAccoun__IdAcc__38996AB5" Association="Self.FK__tblAccoun__IdAcc__38996AB5">
+            <End Role="tblAccountType" EntitySet="tblAccountType" />
+            <End Role="tblAccount" EntitySet="tblAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccoun__IdAcc__5CD6CB2B" Association="Self.FK__tblAccoun__IdAcc__5CD6CB2B">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblAccountMovement" EntitySet="tblAccountMovement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccoun__IdCli__398D8EEE" Association="Self.FK__tblAccoun__IdCli__398D8EEE">
+            <End Role="tblClient" EntitySet="tblClient" />
+            <End Role="tblAccount" EntitySet="tblAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblMoneyA__IdAcc__59FA5E80" Association="Self.FK__tblMoneyA__IdAcc__59FA5E80">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblMoneyAccount" EntitySet="tblMoneyAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccoun__IdTra__5DCAEF64" Association="Self.FK__tblAccoun__IdTra__5DCAEF64">
+            <End Role="tblTransaction" EntitySet="tblTransaction" />
+            <End Role="tblAccountMovement" EntitySet="tblAccountMovement" />
+          </AssociationSet>
+          <FunctionImport Name="spCheckBalance" ReturnType="Collection(dbBankCodingModel.spCheckBalance_Result)">
+            <Parameter Name="IdAccount" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spCheckMovements" ReturnType="Collection(dbBankCodingModel.spCheckMovements_Result)">
+            <Parameter Name="IdAccount" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spComputeInterest" />
+          <FunctionImport Name="spDeposit" ReturnType="Collection(dbBankCodingModel.spDeposit_Result)">
+            <Parameter Name="IdAccount" Mode="In" Type="Int32" />
+            <Parameter Name="Concept" Mode="In" Type="String" />
+            <Parameter Name="Reference" Mode="In" Type="String" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="spGetClientsInfo" ReturnType="Collection(dbBankCodingModel.spGetClientsInfo_Result)" />
+          <FunctionImport Name="spGetReturnCode" ReturnType="Collection(dbBankCodingModel.spGetReturnCode_Result)">
+            <Parameter Name="ReturnCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertAccountMovements" ReturnType="Collection(dbBankCodingModel.spInsertAccountMovements_Result)">
+            <Parameter Name="IdAccount" Mode="In" Type="Int32" />
+            <Parameter Name="IdTransaction" Mode="In" Type="Int32" />
+            <Parameter Name="Concept" Mode="In" Type="String" />
+            <Parameter Name="Reference" Mode="In" Type="String" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="Interests" Mode="In" Type="Decimal" />
+            <Parameter Name="TotalAmount" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="spTransfer" ReturnType="Collection(dbBankCodingModel.spTransfer_Result)">
+            <Parameter Name="IdAccount" Mode="In" Type="Int32" />
+            <Parameter Name="Concept" Mode="In" Type="String" />
+            <Parameter Name="Reference" Mode="In" Type="String" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="IdAccountTransfer" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spWithdrawal" ReturnType="Collection(dbBankCodingModel.spWithdrawal_Result)">
+            <Parameter Name="IdAccount" Mode="In" Type="Int32" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spCheckBalance_Result">
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="202" />
+          <Property Type="String" Name="Account" Nullable="true" MaxLength="15" />
+          <Property Type="Decimal" Name="Balance" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="spCheckMovements_Result">
+          <Property Type="String" Name="Transaction" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Concept" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Reference" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Interests" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalAmount" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="spDeposit_Result">
+          <Property Type="String" Name="ReturnCode" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="Message" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="spGetClientsInfo_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="202" />
+          <Property Type="String" Name="Account" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="AccountType" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Balance" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="spGetReturnCode_Result">
+          <Property Type="String" Name="ReturnCode" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="Message" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="spInsertAccountMovements_Result">
+          <Property Type="String" Name="ReturnCode" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="Message" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="spTransfer_Result">
+          <Property Type="String" Name="ReturnCode" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="Message" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="spWithdrawal_Result">
+          <Property Type="String" Name="ReturnCode" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="Message" Nullable="true" MaxLength="255" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbBankCodingModelStoreContainer" CdmEntityContainer="dbBankCodingEntities">
+          <EntitySetMapping Name="tblAccount">
+            <EntityTypeMapping TypeName="dbBankCodingModel.tblAccount">
+              <MappingFragment StoreEntitySet="tblAccount">
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="IdAccountType" ColumnName="IdAccountType" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAccountMovement">
+            <EntityTypeMapping TypeName="dbBankCodingModel.tblAccountMovement">
+              <MappingFragment StoreEntitySet="tblAccountMovement">
+                <ScalarProperty Name="IdAccountMovement" ColumnName="IdAccountMovement" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="IdTransaction" ColumnName="IdTransaction" />
+                <ScalarProperty Name="Concept" ColumnName="Concept" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Interests" ColumnName="Interests" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAccountType">
+            <EntityTypeMapping TypeName="dbBankCodingModel.tblAccountType">
+              <MappingFragment StoreEntitySet="tblAccountType">
+                <ScalarProperty Name="IdAccountType" ColumnName="IdAccountType" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblClient">
+            <EntityTypeMapping TypeName="dbBankCodingModel.tblClient">
+              <MappingFragment StoreEntitySet="tblClient">
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Names" ColumnName="Names" />
+                <ScalarProperty Name="PaternalLastName" ColumnName="PaternalLastName" />
+                <ScalarProperty Name="MaternalLastName" ColumnName="MaternalLastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMoneyAccount">
+            <EntityTypeMapping TypeName="dbBankCodingModel.tblMoneyAccount">
+              <MappingFragment StoreEntitySet="tblMoneyAccount">
+                <ScalarProperty Name="IdMoneyAccount" ColumnName="IdMoneyAccount" />
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblParameter">
+            <EntityTypeMapping TypeName="dbBankCodingModel.tblParameter">
+              <MappingFragment StoreEntitySet="tblParameter">
+                <ScalarProperty Name="IdParameter" ColumnName="IdParameter" />
+                <ScalarProperty Name="Parameter" ColumnName="Parameter" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblReturnCode">
+            <EntityTypeMapping TypeName="dbBankCodingModel.tblReturnCode">
+              <MappingFragment StoreEntitySet="tblReturnCode">
+                <ScalarProperty Name="IdReturnCode" ColumnName="IdReturnCode" />
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTransaction">
+            <EntityTypeMapping TypeName="dbBankCodingModel.tblTransaction">
+              <MappingFragment StoreEntitySet="tblTransaction">
+                <ScalarProperty Name="IdTransaction" ColumnName="IdTransaction" />
+                <ScalarProperty Name="Transaction" ColumnName="Transaction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spCheckBalance" FunctionName="dbBankCodingModel.Store.spCheckBalance">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbBankCodingModel.spCheckBalance_Result">
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spCheckMovements" FunctionName="dbBankCodingModel.Store.spCheckMovements">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbBankCodingModel.spCheckMovements_Result">
+                <ScalarProperty Name="Transaction" ColumnName="Transaction" />
+                <ScalarProperty Name="Concept" ColumnName="Concept" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Interests" ColumnName="Interests" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spComputeInterest" FunctionName="dbBankCodingModel.Store.spComputeInterest" />
+          <FunctionImportMapping FunctionImportName="spDeposit" FunctionName="dbBankCodingModel.Store.spDeposit">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbBankCodingModel.spDeposit_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetClientsInfo" FunctionName="dbBankCodingModel.Store.spGetClientsInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbBankCodingModel.spGetClientsInfo_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetReturnCode" FunctionName="dbBankCodingModel.Store.spGetReturnCode">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbBankCodingModel.spGetReturnCode_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spInsertAccountMovements" FunctionName="dbBankCodingModel.Store.spInsertAccountMovements">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbBankCodingModel.spInsertAccountMovements_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spTransfer" FunctionName="dbBankCodingModel.Store.spTransfer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbBankCodingModel.spTransfer_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spWithdrawal" FunctionName="dbBankCodingModel.Store.spWithdrawal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbBankCodingModel.spWithdrawal_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

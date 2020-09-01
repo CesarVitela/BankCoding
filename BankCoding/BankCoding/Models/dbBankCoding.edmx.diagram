@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0420b6d37764468a8d9fd52934e6589e" Name="Diagram1">
+        <EntityTypeShape EntityType="dbBankCodingModel.tblAccount" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBankCodingModel.tblAccountMovement" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBankCodingModel.tblAccountType" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBankCodingModel.tblClient" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBankCodingModel.tblMoneyAccount" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBankCodingModel.tblParameter" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBankCodingModel.tblReturnCode" Width="1.5" PointX="7.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBankCodingModel.tblTransaction" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="dbBankCodingModel.FK__tblAccoun__IdAcc__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBankCodingModel.FK__tblAccoun__IdAcc__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBankCodingModel.FK__tblAccoun__IdCli__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBankCodingModel.FK__tblMoneyA__IdAcc__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBankCodingModel.FK__tblAccoun__IdTra__5DCAEF64" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
