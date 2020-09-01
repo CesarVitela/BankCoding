@@ -1,0 +1,572 @@
+{
+	"info": {
+		"_postman_id": "c2340e4b-c9c9-497a-85aa-7af99dd53cc3",
+		"name": "BankCoding",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetClientsInfo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/GetClientsInfo",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"GetClientsInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Withdrawal 500 Alice Account ",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/Deposit?idAccount=1&concept=Deposit test&reference=52052&amount=2000",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"Deposit"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "1"
+						},
+						{
+							"key": "concept",
+							"value": "Deposit test"
+						},
+						{
+							"key": "reference",
+							"value": "52052"
+						},
+						{
+							"key": "amount",
+							"value": "2000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deposit 2000 Alice Account",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/Deposit?idAccount=1&concept=Deposit test&reference=&amount=2000",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"Deposit"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "1"
+						},
+						{
+							"key": "concept",
+							"value": "Deposit test"
+						},
+						{
+							"key": "reference",
+							"value": ""
+						},
+						{
+							"key": "amount",
+							"value": "2000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer 1500 Alice Checking Account to Saving",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/Transfer?idAccount=1&concept=Transfer test&reference=648945&amount=1500&idAccountTransfer=2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"Transfer"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "1"
+						},
+						{
+							"key": "concept",
+							"value": "Transfer test"
+						},
+						{
+							"key": "reference",
+							"value": "648945"
+						},
+						{
+							"key": "amount",
+							"value": "1500"
+						},
+						{
+							"key": "idAccountTransfer",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deposit 1500 Bob Account",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/Deposit?idAccount=3&concept=Deposit test 2&reference=65481&amount=1500",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"Deposit"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "3"
+						},
+						{
+							"key": "concept",
+							"value": "Deposit test 2"
+						},
+						{
+							"key": "reference",
+							"value": "65481"
+						},
+						{
+							"key": "amount",
+							"value": "1500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Withdrawal 1000 Bob Account",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/Withdrawal?idAccount=3&amount=1000",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"Withdrawal"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "3"
+						},
+						{
+							"key": "amount",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Withdrawal 500 Bob Account",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/Withdrawal?idAccount=3&amount=500",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"Withdrawal"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "3"
+						},
+						{
+							"key": "amount",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deposit 2000 Eve Account",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/Deposit?idAccount=4&concept=Deposit test 3&reference=&amount=2000",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"Deposit"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "4"
+						},
+						{
+							"key": "concept",
+							"value": "Deposit test 3"
+						},
+						{
+							"key": "reference",
+							"value": ""
+						},
+						{
+							"key": "amount",
+							"value": "2000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Withdrawal 1000 Eve Account",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/Withdrawal?idAccount=4&amount=1000",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"Withdrawal"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "4"
+						},
+						{
+							"key": "amount",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Withdrawal 500 Eve Account",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/Withdrawal?idAccount=4&amount=500",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"Withdrawal"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "4"
+						},
+						{
+							"key": "amount",
+							"value": "500"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Balance Alice Checking Account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/CheckBalance?idAccount=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"CheckBalance"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Balance Alice Saving Account ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/CheckBalance?idAccount=2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"CheckBalance"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Balance Bob Account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/CheckBalance?idAccount=3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"CheckBalance"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Balance Eve Account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/CheckBalance?idAccount=4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"CheckBalance"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Compute Interest",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/ComputeInterest",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"ComputeInterest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Movements Alice Checking Account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/CheckMovements?idAccount=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"CheckMovements"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Movements Alice Saving Account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/CheckMovements?idAccount=2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"CheckMovements"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Movements Bob Account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/CheckMovements?idAccount=3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"CheckMovements"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Movements Eve Account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44324/api/CheckMovements?idAccount=4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44324",
+					"path": [
+						"api",
+						"CheckMovements"
+					],
+					"query": [
+						{
+							"key": "idAccount",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
